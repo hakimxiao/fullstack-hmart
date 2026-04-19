@@ -39,7 +39,7 @@ export const comments = pgTable("comments", {
   productId: uuid("product_id")
     .notNull()
     .references(() => products.id, { onDelete: "cascade" }),
-  cxreatedAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
+  createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
 });
 
 // 🚩Relation define how tables connect each other. This enables Drizzle's query API
@@ -60,12 +60,12 @@ export const productRelations = relations(products, ({ many, one }) => ({
   comments: many(comments),
   // 'fields' = the foreign key column in THIS table (products.userId)
   // 'references' = the Primary key column in the RELATED table (users.id)
-  users: one(users, { fields: [products.userId], references: [users.id] }), // one product -> one user
+  user: one(users, { fields: [products.userId], references: [users.id] }), // one product -> one user
 }));
 
 // Comments Relations: A comment belongs to one user and one product
 export const commentRelations = relations(comments, ({ one }) => ({
-  users: one(users, { fields: [comments.userId], references: [users.id] }), // One comment -> one user
+  user: one(users, { fields: [comments.userId], references: [users.id] }), // One comment -> one user
   products: one(products, {
     fields: [comments.productId],
     references: [products.id],
