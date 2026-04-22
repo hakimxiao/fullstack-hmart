@@ -10,7 +10,7 @@ import commentRoutes from "./routes/commentRoutes";
 
 const app = express();
 
-app.use(cors({ origin: ENV.FRONTEND_URL }));
+app.use(cors({ origin: ENV.FRONTEND_URL, credentials: true }));
 
 app.use(clerkMiddleware()); // auth obj will be attached to the req
 app.use(express.json()); // parse JSON req body
