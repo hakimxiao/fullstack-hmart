@@ -3,6 +3,7 @@ import LoadingSpinner from "../components/LoadingSpinner";
 import { Link } from "react-router";
 import { PackageIcon, SparkleIcon } from "lucide-react";
 import ProductCard from "../components/ProductCard";
+import { SignInButton } from "@clerk/react";
 
 const HomePage = () => {
   const { data: products, isLoading, error } = useProducts();
@@ -36,10 +37,12 @@ const HomePage = () => {
             <p className="py-4 text-base-content/60">
               Upload, discover, and connecth with creators.
             </p>
-            <Link to="/create" className="btn btn-primary">
-              <SparkleIcon className="size-4" />
-              Start Selling
-            </Link>
+            <SignInButton mode="modal" to="/">
+              <button className="btn btn-primary">
+                <SparkleIcon className="size-4" />
+                Start Selling
+              </button>
+            </SignInButton>
           </div>
         </div>
       </div>
